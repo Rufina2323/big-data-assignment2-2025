@@ -5,8 +5,21 @@ OUTPUT_PATH="/tmp/index/output"
 . ./.venv/bin/activate
 
 if [[ "$INPUT_PATH" != "/index/data" ]]; then
-  echo "Put file from INPUT_PATH to hdfs"
-  # Do something here
+  echo "Put file from $INPUT_PATH to hdfs"
+  mkdir -p local_files
+  OUTPUT_FILE="local_files/$(basename "$INPUT_PATH")"
+  NUMBER_ID=$(( RANDOM % 900000 + 100000 ))
+  TITLE=$(basename "$INPUT_PATH" .txt)
+  TEXT=$(tr '\n' ' ' < "$INPUT_PATH")
+  echo -e "${NUMBER_ID}\t${TITLE}\t${TEXT}" > "$OUTPUT_FILE"
+
+  hdfs dfs -rm -r /local_files
+  hdfs dfs -put local_files /
+  hdfs dfs -ls /local_files
+
+  INPUT_PATH="/local_files/$(basename "$INPUT_PATH")"
+
+  rm -rf local_files
 fi
 
 # Step 1: Set up Cassandra schema
