@@ -25,4 +25,4 @@ bash index.sh
 # Run the ranker
 bash search.sh "football game"
 
-tail -f /dev/null
+# tail -f /dev/null
