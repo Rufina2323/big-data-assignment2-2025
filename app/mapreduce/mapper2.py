@@ -11,4 +11,4 @@ for line in sys.stdin:
     doc_id, doc_title, text = info
     words = re.findall(r'[\w\']+', text.lower())
     for word in words:
-        print(f"{word}\t1")
+        print(f"{doc_id}\t{doc_title}\t{word}\t1")
