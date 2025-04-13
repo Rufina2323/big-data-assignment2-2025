@@ -23,6 +23,6 @@ bash prepare_data.sh
 bash index.sh
 
 # Run the ranker
-bash search.sh "satisfy wear"
+bash search.sh "football game"
 
 tail -f /dev/null
