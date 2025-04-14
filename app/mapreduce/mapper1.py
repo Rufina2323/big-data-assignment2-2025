@@ -17,6 +17,7 @@ for line in sys.stdin:
     # Use regular expression to extract all words (alphanumeric and apostrophes) in lowercase
     words = re.findall(r'[\w\']+', text.lower())
 
+    words = list(set(words))
     # For each word print word and 1  
     for word in words:
         print(f"{word}\t1")
