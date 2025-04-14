@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "This script will include commands to search for documents given the query using Spark RDD"
 
+# Delete output file for query
 hdfs dfs -rm -r /bm25_output
 
 source .venv/bin/activate
@@ -17,4 +18,5 @@ spark-submit \
   --archives /app/.venv.tar.gz#.venv \
   query.py "$1"
 
+# Show obtained results for query
 hdfs dfs -cat /bm25_output/*.csv
